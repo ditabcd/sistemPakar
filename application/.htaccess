@@ -1,0 +1,10 @@
+<ifmodule mod_rewrite.c>
+ RewriteEngine On
+ RewriteBase /sistemPakar_baru
+ RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteRule ^(.*)$ /sistemPakar_baru/index.php/$1 [L]
+</ifmodule>
+<ifmodule !mod_rewrite.c>
+ ErrorDocument 404 /sistemPakar_baru/index.php
+</ifmodule>
