@@ -140,4 +140,72 @@ class DiagnosaUser extends CI_Controller {
 		$data['graph']=$this->tb_diagnosa->graph();
 
 	}
+
+	public function backwardChaining(){
+
+	$db_rule = $this->db->get('tb_rule')->result();
+		$rule = [];
+		foreach ($db_rule as $key => $value) {
+			$rule[] = [
+				'condition' => explode(",", $value->kondisi),
+				'then' => $value->hasil,
+			];
+		}
+
+		#inputan
+		$input = ['G003', 'G006', 'G007', 'G011', 'G013', 'G016', 'G017', 'G018', 'G019'];
+		$z = "J005";
+
+
+		// $input = ['G006', 'G005'];
+		// $z = "J001";
+
+		$result = false;
+		$database = $input;
+		$stack = [];
+		$stack[] = $z;
+		$i = 0;
+		do {
+			$new_iterasi = false;
+			foreach ($rule as $key => $value) {
+				if (count(array_diff($value['condition'], $database)) === 0) {
+					unset($rule[$key]);
+
+					foreach ($stack as $k => $v) {
+						if ($v == $value['then'])
+							unset($stack[$k]);
+					}
+
+					$database[] = $value['then'];
+					$new_iterasi = true;
+					echo "<BR>ITTER-" . $i . " RULE" . $key . " TRUE";
+					echo "<BR>DATABASE : " . implode(",", $database);
+					echo "<BR>";
+					echo "STACK : " . implode(",", $stack);
+					echo "<HR>";
+					break;
+				} else {
+					$add_to_stack = array_diff($value['condition'], $database);
+					$stack = array_merge($stack, $add_to_stack);
+					$stack = array_unique($stack);
+					echo "<BR>ITTER-" . $i . " RULE" . $key . " FALSE";
+					echo "<BR>DATABASE : " . implode(",", $database);
+					echo "<BR>";
+					echo "STACK : " . implode(",", $stack);
+					echo "<HR>";
+				}
+			}
+			if (!$new_iterasi) {
+				$result = false;
+				break;
+			}
+			if (!in_array($z, $stack)) {
+				$result = true;
+				break;
+			}
+			$i++;
+		} while ($i <= 20);
+		echo "RESULT :";
+		var_dump($result);
+	}
 }
