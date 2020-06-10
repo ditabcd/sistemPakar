@@ -11,6 +11,7 @@
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item"><a href=<?php echo base_url('Home');?> class="nav-link">Home</a></li>
 	        	<li class="nav-item active"><a href=<?php echo base_url('DiagnosaUser');?> class="nav-link">Diagnosamu</a></li>
+            <li class="nav-item"><a href=<?php echo base_url('TipsUser');?> class="nav-link">Tips</a></li>
 	        	<li class="nav-item"><a href=<?php echo base_url('About');?> class="nav-link">About</a></li>
 	        	<?php 
 	        	if ($this->session->userdata('id_level')=='1'||$this->session->userdata('id_level')=='2') {?>
