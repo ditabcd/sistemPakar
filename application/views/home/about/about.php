@@ -61,11 +61,11 @@
 	          <div class="heading-section mb-4 mt-md-5">
 	          	<h1 class="big">About</h1>
 	          	<span class="subheading">About Us</span>
-	            <h2 class="mb-4">A World Class Beauty Salon Company</h2>
+	            <h2 class="mb-4">Sistem Pakar Diagnosa Awal Jenis Kulit Wajah</h2>
 	          </div>
 	          <div class="pb-md-5">
-							<p>But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+							<p>Aplikasi berbasis website ini dibuat untuk membantu Anda menemukan jenis kulit wajahnya sesuai dengan pakar menggunakan metode atau perhitungan algoritma berbasis teknologi. </p>
+							<p>Data-data yang ada pada website ini didapat langsung dari salah satu Dokter Spesialis Kulit dan Kelamin di Kota Malang. Kami sangat berharap aplikasi ini dapat digunakan dengan baik dan membantu dalam diagnosa awal jenis kulit Anda. <i class="ion-ios-heart"></i></p>
 						</div>
 					</div>
 				</div>
