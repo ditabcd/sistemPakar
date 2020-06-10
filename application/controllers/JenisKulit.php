@@ -16,7 +16,8 @@ class JenisKulit extends CI_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('id_jeniskulit', 'id_jeniskulit', 'trim|required');
+        $this->form_validation->set_rules('id_jeniskulit', 'id jenis kulit', 'trim|required');
+        $this->form_validation->set_rules('jenis_kulit', 'jenis kulit', 'trim|required');
        
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/jeniskulit/insert');
@@ -68,4 +69,26 @@ class JenisKulit extends CI_Controller
 
         redirect("JenisKulit");
     }
+
+    // public function generate_nomer()
+    // {
+    //     $last_row = $this->db
+    //     ->order_by('id_jeniskulit', 'desc')
+    //     ->get('tb_jeniskulit')->row(0);
+
+    //     if ($last_row == null) {
+    //         $last_kode = "000";
+    //         $last_kode = (int) $last_kode;
+    //         $last_kode++;
+    //         $last_kode = substr("000" . $last_kode, -3);
+    //         $new_kode = "JK".$last_kode;
+    //     } else {
+    //         $last_kode = substr($last_row->id_jeniskulit, -4);
+    //         $last_kode = (int) $last_kode;
+    //         $last_kode++;
+    //         $last_kode = substr("000" . $last_kode, -3);
+    //         $new_kode = "JK".$last_kode;
+    //     }
+    //     return $new_kode;
+    // }
 }
