@@ -19,7 +19,7 @@ class Tips_model extends CI_Model {
 	}
 
 	public function updateData($id_tips){
-		
+
 		$set_tips = [
                 'id_tips' => $this->input->post('id_tips'),
                 'id_jeniskulit' => $this->input->post('id_jeniskulit'),

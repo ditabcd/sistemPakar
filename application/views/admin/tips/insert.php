@@ -20,7 +20,12 @@
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label">Jenis Kulit</label>
                     <div class="col-md-10">
-                        <input type="text" name="id_jeniskulit" class="form-control" placeholder="Masukkan Jenis Kulit" value="<?php echo set_value('id_jeniskulit') ?>"></input>
+                        <select type="text" name="id_jeniskulit" class="form-control" placeholder="Masukkan Jenis Kulit" value="<?php echo set_value('id_jeniskulit') ?>">
+                           <option disabled selected>Pilih Jenis Kulit</option>
+                                <?php foreach ($this->db->get('tb_jeniskulit')->result() as $key => $value) : ?>
+                                    <option value="<?php echo $value->id_jeniskulit ?>"><?php echo $value->id_jeniskulit . " [" . $value->jenis_kulit . "]" ?></option>
+                                <?php endforeach ?>
+                        </select>
                         <?php echo form_error('id_jeniskulit', '', '') ?>
                     </div>
                 </div>

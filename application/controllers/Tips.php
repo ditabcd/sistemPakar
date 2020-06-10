@@ -16,6 +16,11 @@ class Tips extends CI_Controller
         $this->load->view('admin/tips/index', $data);
     }
 
+    public function jenisKulit()
+    {
+        
+    }
+
     public function insert()
     {
         $this->load->library('form_validation');
@@ -23,6 +28,9 @@ class Tips extends CI_Controller
         $this->form_validation->set_rules('id_tips', 'id_tips', 'trim|required');
         $this->form_validation->set_rules('id_jeniskulit', 'id_jeniskulit', 'trim|required');
         $this->form_validation->set_rules('deskripsi_tips', 'deskripsi_tips', 'trim|required');
+
+        $data['jk_data']=$this->Tips_model->getJenisKulit()->result();
+
        
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/tips/insert');
@@ -58,7 +66,7 @@ class Tips extends CI_Controller
     public function delete($id_tips)
     {
 
-        $this->Tips_model->deleteData();
+        $this->Tips_model->deleteData($id_tips);
 
         redirect("Tips");
     }

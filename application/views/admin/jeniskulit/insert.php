@@ -17,7 +17,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label">Jenis Kulit</label>
                     <div class="col-md-10">
