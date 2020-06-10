@@ -40,15 +40,12 @@ class DiagnosaUser extends CI_Controller {
 	public function nbc($id_diagnosa)
 	{
 		$start=microtime(true);
-
 		//get data 
-		//$data_uji =[2,2,3,2,2,1,3,3,1,2,1,2,3,1,1,1,1,2,2];
 		$data_uji=[];
 		foreach ($this->db->where('fk_diagnosa', $id_diagnosa)->get('tb_detail_diagnosa')->result() as $key => $value) {
 			$data_uji[] = $value->nilai;
-		} //ambil data
-		// $data_uji=$this->db->select('nilai')->where('fk_diagnosa',31)->get('tb_detail_diagnosa')->result();
-
+		} 
+		
 		echo "<pre>";
 		var_dump($data_uji);
 
@@ -150,15 +147,11 @@ class DiagnosaUser extends CI_Controller {
 				'condition' => explode(",", $value->kondisi),
 				'then' => $value->hasil,
 			];
-		}
+		} //me
 
 		#inputan
 		$input = ['G003', 'G006', 'G007', 'G011', 'G013', 'G016', 'G017', 'G018', 'G019'];
 		$z = "J005";
-
-
-		// $input = ['G006', 'G005'];
-		// $z = "J001";
 
 		$result = false;
 		$database = $input;
