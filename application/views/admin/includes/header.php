@@ -63,16 +63,22 @@
           </li>
           <li>
             <a href="<?php echo base_url("JenisKulit") ?>">
-              <i class="now-ui-icons location_map-big"></i>
+              <i class="now-ui-icons education_atom"></i>
               <p>Jenis Kulit</p>
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url("Keputusan") ?>">
+            <a href="<?php echo base_url("Tips") ?>">
+              <i class="now-ui-icons education_atom"></i>
+              <p>Tips</p>
+            </a>
+          </li>
+          <!-- <li>
+            <a href="<?php //echo base_url("Keputusan") ?>">
               <i class="now-ui-icons users_single-02"></i>
               <p>Keputusan</p>
             </a>
-          </li>
+          </li> -->
           <li>
             <a href="<?php echo base_url("login/logout") ?>">
               <i class="now-ui-icons users_single-02"></i>

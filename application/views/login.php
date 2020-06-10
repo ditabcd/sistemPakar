@@ -44,6 +44,11 @@
 								Create an account
 							</a>
 						</div>
+						<div>
+							<a href="<?php echo base_url('home/index');  ?>" class="txt1">
+								Back to Home
+							</a>
+						</div>
 					</div>
 			
 					<div class="container-login100-form-btn">
