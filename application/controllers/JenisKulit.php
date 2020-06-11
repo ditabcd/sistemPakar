@@ -3,12 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class JenisKulit extends CI_Controller
 {
+    function __construct() {
+        parent::__construct();
+        $this->load->model('JenisKulit_model');
+        $this->load->helper('form');
+    }
 
     public function index()
     {
-        $data['jeniskulit_data'] = $this->db
-            ->get('tb_jeniskulit')
-            ->result();
+        $data['jeniskulit_data'] = $this->JenisKulit_model->getData()->result();
         $this->load->view('admin/jeniskulit/index', $data);
     }
 
@@ -16,18 +19,13 @@ class JenisKulit extends CI_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('id_jeniskulit', 'id jenis kulit', 'trim|required');
-        $this->form_validation->set_rules('jenis_kulit', 'jenis kulit', 'trim|required');
+        $this->form_validation->set_rules('id_jeniskulit', 'Id Jenis Kulit', 'trim|required');
+        $this->form_validation->set_rules('jenis_kulit', 'Jenis Kulit', 'trim|required');
        
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/jeniskulit/insert');
         } else {
-            $set_users = [
-                'id_jeniskulit' => $this->input->post('id_jeniskulit'),
-                'jenis_kulit' => $this->input->post('jenis_kulit'),
-            ];
-            $this->db->insert('tb_jeniskulit', $set_users);
-
+            $this->JenisKulit_model->insertData();
             redirect("JenisKulit");
         }
     }
@@ -36,8 +34,8 @@ class JenisKulit extends CI_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('id_jeniskulit', 'id_jeniskulit', 'trim|required');
-    
+        $this->form_validation->set_rules('id_jeniskulit', 'Id Jenis Kulit', 'trim|required');
+        $this->form_validation->set_rules('jenis_kulit', 'Jenis Kulit', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $users_data = $this->db
@@ -47,26 +45,14 @@ class JenisKulit extends CI_Controller
             $data['jenis_kulit_data'] = $users_data;
             $this->load->view('admin/jeniskulit/update', $data);
         } else {
-            $set_jeniskulit = [
-                'id_jeniskulit' => $this->input->post('id_jeniskulit'),
-                'jenis_kulit' => $this->input->post('jenis_kulit'),
-            ];
-
-            $this->db
-                ->where('id_jeniskulit', $id_jeniskulit)
-                ->update('tb_jeniskulit', $set_jeniskulit);
-
+            $this->JenisKulit_model->updateData($id_jeniskulit);
             redirect('JenisKulit');
         }
     }
 
     public function delete($id_jeniskulit)
     {
-
-        $this->db
-            ->where('id_jeniskulit', $id_jeniskulit)
-            ->delete('tb_jeniskulit');
-
+        $this->JenisKulit_model->deleteData($id_jeniskulit);
         redirect("JenisKulit");
     }
 
