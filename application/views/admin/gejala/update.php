@@ -9,16 +9,15 @@
             <div class="card-body">
                 <?php echo form_open_multipart('') ?>
 
-
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label">id_gejala</label>
+                    <!-- <label class="col-md-2 col-form-label">id_gejala</label> --> 
                     <div class="col-md-10">
-                        <input type="text" name="id_gejala" class="form-control" placeholder="id_gejala" value="<?php echo $gejala_data->id_gejala ?>">
+                        <input hidden type="text" name="id_gejala" class="form-control" placeholder="id_gejala" value="<?php echo $gejala_data->id_gejala ?>">
                         <?php echo form_error('id_gejala', '', '') ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label">gejala</label>
+                    <label class="col-md-2 col-form-label">Gejala</label>
                     <div class="col-md-10">
                         <input type="text" name="gejala" class="form-control" placeholder="gejala" value="<?php echo $gejala_data->gejala ?>">
                         <?php echo form_error('gejala', '', '') ?>

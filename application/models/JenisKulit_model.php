@@ -8,11 +8,7 @@ class JenisKulit_model extends CI_Model {
 		result();
 	}
 
-	public function insertData(){
-		$set_users = [
-                'id_jeniskulit' => $this->input->post('id_jeniskulit'),
-                'jenis_kulit' => $this->input->post('jenis_kulit'),
-            ];
+	public function insertData($set_users){
             $this->db->insert('tb_jeniskulit', $set_users);
 	}
 

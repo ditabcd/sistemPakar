@@ -8,12 +8,8 @@ class Gejala_model extends CI_Model {
 		result();
 	}
 
-	public function insertData(){
-		$set_users = $this->input->post();
-		$set_users = [
-                'id_gejala' => $this->input->post('id_gejala'),
-                'gejala' => $this->input->post('gejala'),
-            ];
+	public function insertData($set_users){
+		
         $this->db->insert('tb_gejala', $set_users);
 	}
 

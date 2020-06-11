@@ -10,14 +10,6 @@
                 <?php echo form_open_multipart('') ?>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label">Id Tips</label>
-                    <div class="col-md-10">
-                        <input type="text" name="id_tips" class="form-control" placeholder="Masukkan Id Tips" value="<?php echo set_value('id_tips') ?>">
-                        <?php echo form_error('id_tips', '', '') ?>
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <label class="col-md-2 col-form-label">Jenis Kulit</label>
                     <div class="col-md-10">
                         <select type="text" name="id_jeniskulit" class="form-control" placeholder="Masukkan Jenis Kulit" value="<?php echo set_value('id_jeniskulit') ?>">

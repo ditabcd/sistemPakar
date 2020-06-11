@@ -19,13 +19,16 @@ class JenisKulit extends CI_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('id_jeniskulit', 'Id Jenis Kulit', 'trim|required');
         $this->form_validation->set_rules('jenis_kulit', 'Jenis Kulit', 'trim|required');
        
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/jeniskulit/insert');
         } else {
-            $this->JenisKulit_model->insertData();
+            $set_users = [
+                'id_jeniskulit' => $this->generate_nomer(),
+                'jenis_kulit' => $this->input->post('jenis_kulit'),
+            ];
+            $this->JenisKulit_model->insertData($set_users);
             redirect("JenisKulit");
         }
     }
@@ -34,7 +37,6 @@ class JenisKulit extends CI_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('id_jeniskulit', 'Id Jenis Kulit', 'trim|required');
         $this->form_validation->set_rules('jenis_kulit', 'Jenis Kulit', 'trim|required');
 
         if ($this->form_validation->run() == false) {
@@ -56,25 +58,25 @@ class JenisKulit extends CI_Controller
         redirect("JenisKulit");
     }
 
-    // public function generate_nomer()
-    // {
-    //     $last_row = $this->db
-    //     ->order_by('id_jeniskulit', 'desc')
-    //     ->get('tb_jeniskulit')->row(0);
+    public function generate_nomer()
+    {
+        $last_row = $this->db
+        ->order_by('id_jeniskulit', 'desc')
+        ->get('tb_jeniskulit')->row(0);
 
-    //     if ($last_row == null) {
-    //         $last_kode = "000";
-    //         $last_kode = (int) $last_kode;
-    //         $last_kode++;
-    //         $last_kode = substr("000" . $last_kode, -3);
-    //         $new_kode = "JK".$last_kode;
-    //     } else {
-    //         $last_kode = substr($last_row->id_jeniskulit, -4);
-    //         $last_kode = (int) $last_kode;
-    //         $last_kode++;
-    //         $last_kode = substr("000" . $last_kode, -3);
-    //         $new_kode = "JK".$last_kode;
-    //     }
-    //     return $new_kode;
-    // }
+        if ($last_row == null) {
+            $last_kode = "000";
+            $last_kode = (int) $last_kode;
+            $last_kode++;
+            $last_kode = substr("000" . $last_kode, -3);
+            $new_kode = "J".$last_kode;
+        } else {
+            $last_kode = substr($last_row->id_jeniskulit, -3);
+            $last_kode = (int) $last_kode;
+            $last_kode++;
+            $last_kode = substr("000" . $last_kode, -3);
+            $new_kode = "J".$last_kode;
+        }
+        return $new_kode;
+    }
 }

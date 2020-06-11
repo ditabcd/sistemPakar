@@ -11,9 +11,6 @@
           <table class="table">
             <thead class=" text-primary">
               <th>
-                No
-              </th>
-              <th>
                 Id Tips
               </th>
               <th>
@@ -29,9 +26,6 @@
             <tbody>
               <?php foreach ($tips_data as $key => $value) : ?>
                 <tr>
-                  <td>
-                    <?php echo $key+1; ?>
-                  </td>
                   <td>
                     <?php echo $value->id_tips ?>
                   </td>

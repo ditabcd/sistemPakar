@@ -9,13 +9,13 @@
             <div class="card-body">
                 <?php echo form_open_multipart('') ?>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <label class="col-md-2 col-form-label">Id Jenis Kulit</label>
                     <div class="col-md-10">
-                        <input type="text" name="id_jeniskulit" class="form-control" placeholder="id_jeniskulit" value="<?php echo set_value('id_jeniskulit') ?>">
-                        <?php echo form_error('id_jeniskulit', '', '') ?>
+                        <input type="text" name="id_jeniskulit" class="form-control" placeholder="id_jeniskulit" value="<?php //echo set_value('id_jeniskulit') ?>">
+                        <?php //echo form_error('id_jeniskulit', '', '') ?>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label">Jenis Kulit</label>

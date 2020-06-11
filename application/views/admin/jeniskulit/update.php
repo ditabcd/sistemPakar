@@ -11,9 +11,9 @@
 
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label">Id Jenis Kulit</label>
+                    <!-- <label class="col-md-2 col-form-label">Id Jenis Kulit</label> -->
                     <div class="col-md-10">
-                        <input type="text" name="id_jeniskulit" class="form-control" placeholder="id_jeniskulit" value="<?php echo $jenis_kulit_data->id_jeniskulit ?>">
+                        <input  hidden type="text" name="id_jeniskulit" class="form-control" placeholder="id_jeniskulit" value="<?php echo $jenis_kulit_data->id_jeniskulit ?>">
                         <?php echo form_error('id_jeniskulit', '', '') ?>
                     </div>
                 </div>

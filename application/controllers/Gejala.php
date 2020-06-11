@@ -19,13 +19,16 @@ class Gejala extends CI_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('id_gejala', 'id_gejala', 'trim|required');
         $this->form_validation->set_rules('gejala', 'Gejala', 'trim|required');
        
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/gejala/insert');
         } else {
-            $this->Gejala_model->insertData();
+        $set_users = [
+                'id_gejala' => $this->generate_nomer(),
+                'gejala' => $this->input->post('gejala'),
+            ];
+            $this->Gejala_model->insertData($set_users);
             redirect("Gejala");
         }
     }
@@ -34,7 +37,6 @@ class Gejala extends CI_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('id_gejala', 'id_gejala', 'trim|required');
         $this->form_validation->set_rules('gejala', 'gejala', 'trim|required');
     
 
@@ -58,5 +60,27 @@ class Gejala extends CI_Controller
         $this->Gejala_model->deleteData($id_gejala);
 
         redirect("Gejala");
+    }
+
+    public function generate_nomer()
+    {
+        $last_row = $this->db
+        ->order_by('id_gejala', 'desc')
+        ->get('tb_gejala')->row(0);
+
+        if ($last_row == null) {
+            $last_kode = "000";
+            $last_kode = (int) $last_kode;
+            $last_kode++;
+            $last_kode = substr("000" . $last_kode, -3);
+            $new_kode = "G".$last_kode;
+        } else {
+            $last_kode = substr($last_row->id_gejala, -3);
+            $last_kode = (int) $last_kode;
+            $last_kode++;
+            $last_kode = substr("000" . $last_kode, -3);
+            $new_kode = "G".$last_kode;
+        }
+        return $new_kode;
     }
 }

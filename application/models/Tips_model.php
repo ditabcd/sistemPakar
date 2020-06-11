@@ -8,13 +8,7 @@ class Tips_model extends CI_Model {
 		result();
 	}
 
-	public function insertData(){
-		$set_users = $this->input->post();
-		$set_users = [
-                'id_tips' => $this->input->post('id_tips'),
-                'id_jeniskulit' => $this->input->post('id_jeniskulit'),
-                'deskripsi_tips' => $this->input->post('deskripsi_tips'),
-            ];
+	public function insertData($set_users){
         $this->db->insert('tb_tips', $set_users);
 	}
 

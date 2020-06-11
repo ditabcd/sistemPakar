@@ -12,9 +12,6 @@
           <table class="table">
             <thead class=" text-primary">
               <th>
-                No
-              </th>
-              <th>
                 Id Jenis Kulit
               </th>
               <th>
@@ -28,10 +25,7 @@
               <?php foreach ($jeniskulit_data as $key => $value) : ?>
                 <tr>
                   <td>
-                    <?php echo $key+1; ?>
-                  </td>
-                  <td>
-                    <?php echo $value->id_jeniskulit ?>
+                    <?php echo $value->id_jeniskulit; ?>
                   </td>
                   <td>
                     <?php echo $value->jenis_kulit ?>
