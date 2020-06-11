@@ -45,7 +45,7 @@ class DiagnosaUser extends CI_Controller {
 		foreach ($this->db->where('fk_diagnosa', $id_diagnosa)->get('tb_detail_diagnosa')->result() as $key => $value) {
 			$data_uji[] = $value->nilai;
 		} 
-		
+
 		echo "<pre>";
 		var_dump($data_uji);
 
@@ -133,8 +133,6 @@ class DiagnosaUser extends CI_Controller {
 		
 		$data=$this->db->get('tb_diagnosa');
 		return $data->result();
-
-		$data['graph']=$this->tb_diagnosa->graph();
 
 	}
 

@@ -21,7 +21,7 @@
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label">gejala</label>
                     <div class="col-md-10">
-                        <input type="text" name="gejala" class="form-control" placeholder="gejala" value="<?php echo set_value('gejala') ?>">
+                        <input type="text" name="gejala" class="form-control" placeholder="Masukkan Gejala" value="<?php echo set_value('gejala') ?>">
                         <?php echo form_error('gejala', '', '') ?>
                     </div>
                 </div> 

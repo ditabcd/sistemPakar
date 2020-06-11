@@ -16,11 +16,6 @@ class Tips extends CI_Controller
         $this->load->view('admin/tips/index', $data);
     }
 
-    public function jenisKulit()
-    {
-        
-    }
-
     public function insert()
     {
         $this->load->library('form_validation');

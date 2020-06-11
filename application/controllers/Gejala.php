@@ -3,13 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Gejala extends CI_Controller
 {
-
+    function __construct() {
+        parent::__construct();
+        $this->load->model('Gejala_model');
+        $this->load->helper('form');
+    }
 
     public function index()
     {
-        $data['gejala_data'] = $this->db
-            ->get('tb_gejala')
-            ->result();
+        $data['gejala_data'] = $this->Gejala_model->getData()->result();
         $this->load->view('admin/gejala/index', $data);
     }
 
@@ -18,16 +20,12 @@ class Gejala extends CI_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('id_gejala', 'id_gejala', 'trim|required');
+        $this->form_validation->set_rules('gejala', 'Gejala', 'trim|required');
        
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/gejala/insert');
         } else {
-            $set_users = [
-                'id_gejala' => $this->input->post('id_gejala'),
-                'gejala' => $this->input->post('gejala'),
-            ];
-            $this->db->insert('tb_gejala', $set_users);
-
+            $this->Gejala_model->insertData();
             redirect("Gejala");
         }
     }
@@ -37,6 +35,7 @@ class Gejala extends CI_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('id_gejala', 'id_gejala', 'trim|required');
+        $this->form_validation->set_rules('gejala', 'gejala', 'trim|required');
     
 
         if ($this->form_validation->run() == false) {
@@ -47,14 +46,8 @@ class Gejala extends CI_Controller
             $data['gejala_data'] = $users_data;
             $this->load->view('admin/gejala/update', $data);
         } else {
-            $set_gejala = [
-                'id_gejala' => $this->input->post('id_gejala'),
-                'gejala' => $this->input->post('gejala'),
-            ];
-
-            $this->db
-                ->where('id_gejala', $id_gejala)
-                ->update('tb_gejala', $set_gejala);
+            
+            $this->Gejala_model->updateData($id_gejala);
 
             redirect('Gejala');
         }
@@ -62,10 +55,7 @@ class Gejala extends CI_Controller
 
     public function delete($id_gejala)
     {
-
-        $this->db
-            ->where('id_gejala', $id_gejala)
-            ->delete('tb_gejala');
+        $this->Gejala_model->deleteData($id_gejala);
 
         redirect("Gejala");
     }
