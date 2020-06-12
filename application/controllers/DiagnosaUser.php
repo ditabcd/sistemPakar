@@ -122,14 +122,18 @@ class DiagnosaUser extends CI_Controller {
 
 		$time_lapsed_secs=microtime(true) - $start;
 
+		$hasil = max($posterior);
+
 		echo "<pre>hasil posterior<br>";
 		var_dump($posterior);
+		echo "<pre>hasil max posterior<br>";
+		var_dump($hasil);
 		die();
 	}
 
-	public function hasilDiagnosaNbc()
+	public function hasilDiagnosaNbc($id_diagnosa)
 	{
-		$this->load->view('home/hasil_diagnosa/hasil_diagnosa');
+		$this->load->view('home/hasil_diagnosa/hasil_diagnosa', $id_diagnosa);
 		
 		$data=$this->db->get('tb_diagnosa');
 		return $data->result();
@@ -145,7 +149,7 @@ class DiagnosaUser extends CI_Controller {
 				'condition' => explode(",", $value->kondisi),
 				'then' => $value->hasil,
 			];
-		} //me
+		} //mengambil rule dari db, explode=menghilangkan koma
 
 		#inputan
 		$input = ['G003', 'G006', 'G007', 'G011', 'G013', 'G016', 'G017', 'G018', 'G019'];
@@ -154,7 +158,7 @@ class DiagnosaUser extends CI_Controller {
 		$result = false;
 		$database = $input;
 		$stack = [];
-		$stack[] = $z;
+		$stack[] = $z; //mengisi stack dg hasil yg diinginkan
 		$i = 0;
 		do {
 			$new_iterasi = false;
