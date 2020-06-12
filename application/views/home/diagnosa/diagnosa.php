@@ -50,10 +50,9 @@
           </div>
         </div>
       </div>
-    </section>
-    
-    <section>
-    	 <div class="row">
+    </section>   
+  <section>
+  <div class="row">
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
@@ -109,6 +108,7 @@
       </div>
     </div>
   </div>
+</section>
 </div>
-    </section>
+</section>
     <?php $this->load->view('home/includes/footer'); ?>
