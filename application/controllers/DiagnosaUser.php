@@ -34,13 +34,15 @@ class DiagnosaUser extends CI_Controller {
 			$this->db->insert('tb_detail_diagnosa', $set);
 		}
 
+		$this->db->where('')
+
 		redirect("DiagnosaUser/nbc/".$id_diagnosa);
 	}
 
 	public function nbc($id_diagnosa)
 	{
 		$start=microtime(true);
-		//get data 
+		//get data from detail diagnosa
 		$data_uji=[];
 		foreach ($this->db->where('fk_diagnosa', $id_diagnosa)->get('tb_detail_diagnosa')->result() as $key => $value) {
 			$data_uji[] = $value->nilai;
@@ -49,7 +51,7 @@ class DiagnosaUser extends CI_Controller {
 		echo "<pre>";
 		var_dump($data_uji);
 
-		//get data training form db
+		//get data training from db
 		$data_training = [];
 		foreach ($this->db->get('tb_training')->result() as $key => $value) {
 			$data_detail = [];
@@ -124,20 +126,11 @@ class DiagnosaUser extends CI_Controller {
 
 		$hasil = max($posterior);
 
-		echo "<pre>hasil posterior<br>";
-		var_dump($posterior);
-		echo "<pre>hasil max posterior<br>";
-		var_dump($hasil);
-		die();
-	}
-
-	public function hasilDiagnosaNbc($id_diagnosa)
-	{
-		$this->load->view('home/hasil_diagnosa/hasil_diagnosa', $id_diagnosa);
-		
-		$data=$this->db->get('tb_diagnosa');
-		return $data->result();
-
+		$this->db->where('id_diagnosa',$id_diagnosa)->update('tb_diagnosa',['hasil_diagnosa_nbc' => $hasil]);
+		$view_data['hasil'] = $hasil;
+		$view_data['posterior'] = $posterior;
+		$this->load->view('hasil_diagnosa/hasil_diagnosa',$view_data);
+		//engkok ndek view ne manggil e $hasil
 	}
 
 	public function backwardChaining(){
