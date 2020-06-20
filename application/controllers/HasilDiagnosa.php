@@ -7,8 +7,6 @@ Class HasilDiagnosa extends CI_Controller {
 	{
 		$this->load->view('home/hasil_diagnosa/hasil_diagnosa');
 	}
-
-
 }
 
 ?>

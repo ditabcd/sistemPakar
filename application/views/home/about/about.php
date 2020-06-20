@@ -11,7 +11,7 @@
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item"><a href=<?php echo base_url('Home');?> class="nav-link">Home</a></li>
 	        	<li class="nav-item"><a href=<?php echo base_url('DiagnosaUser');?> class="nav-link">Diagnosamu</a></li>
-	        	<li class="nav-item"><a href=<?php echo base_url('TipsUser');?> class="nav-link">Tips</a></li>
+	        	<li class="nav-item"><a href=<?php echo base_url('Tips');?> class="nav-link">Tips</a></li>
 	        	<li class="nav-item active"><a href=<?php echo base_url('About');?> class="nav-link">About</a></li>
 	        	<?php 
 	        	if ($this->session->userdata('id_level')=='1'||$this->session->userdata('id_level')=='2') {?>
@@ -22,6 +22,7 @@
 	        			echo $this->session->userdata('username'); ?>
 	        		</span></a>
 	        		<div class="dropdown-menu">
+	        			<a class="dropdown-item" href=<?php echo base_url('History/history/'.$this->session->id_user);?>>History</a>
 	        			<a class="dropdown-item" href=<?php echo base_url('login/logout') ?>>Logout</a>
 	        		</div>
 	        	</span></li>
@@ -52,7 +53,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 d-flex">
-						<div class="p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/about.jpg);">
+						<div class="p-md-5 img img-2 d-flex justify-content-center align-items-center" style="">
 							<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
 								<span class="icon-play"></span>
 							</a>

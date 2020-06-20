@@ -1,43 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class DiagnosaUser extends CI_Controller
+class DiagnosaDetail extends CI_Controller
 {
-
-	public function index()
-	{
-		$data['gejala'] = $this->db->get('tb_gejala')->result();
-		$this->load->view('home/diagnosa/diagnosa', $data);
-	}
-
-	public function insert_diagnosa()
-	{
-		$gejala = $this->db->get('tb_gejala')->result();
-
-		$set = [
-			'tanggal' => date("Y-m-d"),
-			'id_user' => $this->session->userdata('id_user')
-		];
-
-		$data_diagnosa = $this->db->insert('tb_diagnosa', $set);
-
-		$id_diagnosa = $this->db->insert_id();
-
-		$diagnosa = $this->input->post('diagnosa');
-
-		foreach ($diagnosa as $key => $value) {
-
-			$set = [
-				'fk_diagnosa' => $id_diagnosa,
-				'fk_gejala' => $key,
-				'nilai' => $value
-			];
-			$this->db->insert('tb_detail_diagnosa', $set);
-		}
-
-		redirect("DiagnosaUser/nbc/" . $id_diagnosa);
-	}
-
 	public function nbc($id_diagnosa)
 	{
 		$start = microtime(true);
@@ -72,6 +37,7 @@ class DiagnosaUser extends CI_Controller
 		} //melihat ada jenis kulit apa saja pada data training
 
 		$count_jeniskulit = array_count_values($data_jeniskulit); //menghitung jumlah masing-masing jenis kulit
+		
 
 		$sum_all_jeniskulit = array_sum($count_jeniskulit); //mencari jumlah keseluruhan jenis kulit
 		$prior = [];
@@ -126,18 +92,25 @@ class DiagnosaUser extends CI_Controller
 		$max = max($posterior);
 		$hasil = array_keys($posterior, $max)[0];
 
-		echo "<pre>";
-		var_dump($hasil);
+		//echo "<pre>";
+		// var_dump($hasil);
+		// var_dump($prior);
+		// var_dump($likelihood);
+		// var_dump($posterior);
 
 		$db_jeniskulit = $this->db->where('id_jeniskulit', $hasil)->get('tb_jeniskulit')->row(0);
 
 		$this->db->where('id_diagnosa', $id_diagnosa)->update('tb_diagnosa', ['hasil_diagnosa_nbc' => $max, "fk_jeniskulit" => $hasil]);
 		$view_data['id_diagnosa'] = $id_diagnosa;
 		$view_data['hasil'] = $hasil;
+		$view_data['prior'] = $prior;
+		$view_data['likelihood'] = $likelihood;
 		$view_data['posterior'] = $posterior;
 		$view_data['jenis_kulit'] = $db_jeniskulit;
 		$view_data['gejala'] = $this->db->get('tb_gejala')->result();
-		$this->load->view('home/hasil_diagnosa/hasil_diagnosa', $view_data);
+		$view_data['jk'] = $this->db->get('tb_jeniskulit')->result();
+
+		$this->load->view('admin/dashboard/detail_diagnosa', $view_data);
 		//engkok ndek view ne manggil e $hasil
 	}
 

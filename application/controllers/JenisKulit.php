@@ -25,7 +25,7 @@ class JenisKulit extends CI_Controller
             $this->load->view('admin/jeniskulit/insert');
         } else {
             $set_users = [
-                'id_jeniskulit' => $this->generate_nomer(),
+                'id_jeniskulit' => $this->generateNomor(),
                 'jenis_kulit' => $this->input->post('jenis_kulit'),
             ];
             $this->JenisKulit_model->insertData($set_users);
@@ -58,7 +58,7 @@ class JenisKulit extends CI_Controller
         redirect("JenisKulit");
     }
 
-    public function generate_nomer()
+    public function generateNomor()
     {
         $last_row = $this->db
         ->order_by('id_jeniskulit', 'desc')

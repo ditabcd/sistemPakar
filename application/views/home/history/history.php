@@ -11,7 +11,7 @@
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item"><a href=<?php echo base_url('Home');?> class="nav-link">Home</a></li>
 	        	<li class="nav-item active"><a href=<?php echo base_url('DiagnosaUser');?> class="nav-link">Diagnosamu</a></li>
-            <li class="nav-item"><a href=<?php echo base_url('Tips');?> class="nav-link">Tips</a></li>
+            <li class="nav-item"><a href=<?php echo base_url('Tips/index_user');?> class="nav-link">Tips</a></li>
 	        	<li class="nav-item"><a href=<?php echo base_url('About');?> class="nav-link">About</a></li>
 	        	<?php 
 	        	if ($this->session->userdata('id_level')=='1'||$this->session->userdata('id_level')=='2') {?>
@@ -42,10 +42,10 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
           <div class="col-md-9 ftco-animate pb-5">
-            <h2 class="mb-0 bread">Diagnosa</h2>
-            <p class="breadcrumbs"><span class="mr-2"><a href="<?php echo base_url("Home") ?>">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Diagnosamu <i class="ion-ios-arrow-forward"></i></span></p>
+            <h2 class="mb-0 bread">History</h2>
+            <p class="breadcrumbs"><span class="mr-2"><a href="<?php echo base_url("Home") ?>">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>History <i class="ion-ios-arrow-forward"></i></span></p>
             <p class="breadcrumbs"><span class="mr-2">
-            	Isi sesuai dengan yang Kamu rasakan bersama dengan kulit wajahmu. Temukan jenis kulit wajahmu disini! <i class="ion-ios-heart"></i>
+            	Lihat diagnosamu sebelumnya di halaman ini. <i class="ion-ios-heart"></i>
             </span>
             </p>
           </div>
@@ -57,7 +57,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <?php echo form_open("DiagnosaUser/insert_diagnosa") ?>
+        <?php echo form_open("") ?>
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
@@ -65,35 +65,23 @@
                 No
               </th>
               <th>
-                Gejala
+                Tanggal
               </th>
-              <th><center>Ya</center></th>
-              <th><center>Terkadang</center></th>
-              <th><center>Tidak</center></th>
+              <th>
+                Jenis Kulit
+              </th>
             </thead>
             <tbody>
-              <?php foreach ($gejala as $key => $value) : ?>
+              <?php foreach ($history_data as $key => $value) : ?>
                 <tr> 
                   <td>
                     <?php echo $key+1; ?>
                   </td>
                   <td>
-                    <?php echo $value->gejala ?>
+                    <?php echo $value->tanggal ?>
                   </td>
                   <td>
-                  	<center>
-                  		<input type="radio" name="diagnosa[<?php echo $value->id_gejala ?>]" class="" value="3">
-                  	</center>
-                  </td>
-                  <td>
-                  	<center>
-                  		<input type="radio" name="diagnosa[<?php echo $value->id_gejala ?>]" class="" value="2">
-                  	</center>
-                  </td>
-                  <td>
-                  	<center>	
-                  		<input type="radio" name="diagnosa[<?php echo $value->id_gejala ?>]" class="" value="1">
-                  	</center>
+                    <?php echo $value->fk_jeniskulit ?>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -101,9 +89,7 @@
           </table>
         </div>
         <center>
-        	<button type="submit" name="" class="button btn-lg btn-success">
-        		Submit Here!
-        	</button>
+        
         </center>
         <?php echo form_close(); ?>
       </div>

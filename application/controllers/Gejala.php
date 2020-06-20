@@ -25,7 +25,7 @@ class Gejala extends CI_Controller
             $this->load->view('admin/gejala/insert');
         } else {
         $set_users = [
-                'id_gejala' => $this->generate_nomer(),
+                'id_gejala' => $this->generateNomor(),
                 'gejala' => $this->input->post('gejala'),
             ];
             $this->Gejala_model->insertData($set_users);
@@ -62,7 +62,7 @@ class Gejala extends CI_Controller
         redirect("Gejala");
     }
 
-    public function generate_nomer()
+    public function generateNomor()
     {
         $last_row = $this->db
         ->order_by('id_gejala', 'desc')

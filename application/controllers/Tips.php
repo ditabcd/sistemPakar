@@ -12,9 +12,22 @@ class Tips extends CI_Controller
 
     public function index()
     {
-        $data['tips_data'] = $this->Tips_model->getData()->result();
-        $this->load->view('admin/tips/index', $data);
+        if($this->session->userdata('id_level')==1){
+            $data['tips_data'] = $this->Tips_model->getData()->result();
+            $this->load->view('admin/tips/index', $data);
+        }else {
+             $this->load->model('Tips_model');
+            $data['tips_data'] = $this->Tips_model->getData()->result();
+            $this->load->view('home/tips/tips', $data);
+        }
     }
+
+    // public function index_user()
+    // {
+    //     $this->load->model('Tips_model');
+    //     $data['tips_data'] = $this->Tips_model->getData()->result();
+    //     $this->load->view('home/tips/tips', $data);
+    // } 
 
     public function insert()
     {
@@ -27,7 +40,7 @@ class Tips extends CI_Controller
             $this->load->view('admin/tips/insert');
         } else {
             $set_users = [
-                'id_tips' => $this->generate_nomer(),
+                'id_tips' => $this->generateNomor(),
                 'id_jeniskulit' => $this->input->post('id_jeniskulit'),
                 'deskripsi_tips' => $this->input->post('deskripsi_tips'),
             ];
@@ -66,7 +79,7 @@ class Tips extends CI_Controller
         redirect("Tips");
     }
 
-    public function generate_nomer()
+    public function generateNomor()
     {
         $last_row = $this->db
         ->order_by('id_tips', 'desc')
