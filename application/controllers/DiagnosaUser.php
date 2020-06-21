@@ -126,8 +126,8 @@ class DiagnosaUser extends CI_Controller
 		$max = max($posterior);
 		$hasil = array_keys($posterior, $max)[0];
 
-		echo "<pre>";
-		var_dump($hasil);
+		// echo "<pre>";
+		// var_dump($hasil);
 
 		$db_jeniskulit = $this->db->where('id_jeniskulit', $hasil)->get('tb_jeniskulit')->row(0);
 
@@ -140,6 +140,7 @@ class DiagnosaUser extends CI_Controller
 		$this->load->view('home/hasil_diagnosa/hasil_diagnosa', $view_data);
 		//engkok ndek view ne manggil e $hasil
 	}
+
 
 	public function backward_action()
 	{
@@ -207,21 +208,21 @@ class DiagnosaUser extends CI_Controller
 
 					$database[] = $value['then'];
 					$new_iterasi = true;
-					echo "<BR>ITTER-" . $i . " RULE" . $key . " TRUE";
-					echo "<BR>DATABASE : " . implode(",", $database);
-					echo "<BR>";
-					echo "STACK : " . implode(",", $stack);
-					echo "<HR>";
+					// echo "<BR>ITTER-" . $i . " RULE" . $key . " TRUE";
+					// echo "<BR>DATABASE : " . implode(",", $database);
+					// echo "<BR>";
+					// echo "STACK : " . implode(",", $stack);
+					// echo "<HR>";
 					break;
 				} else {
 					$add_to_stack = array_diff($value['condition'], $database);
 					$stack = array_merge($stack, $add_to_stack);
 					$stack = array_unique($stack);
-					echo "<BR>ITTER-" . $i . " RULE" . $key . " FALSE";
-					echo "<BR>DATABASE : " . implode(",", $database);
-					echo "<BR>";
-					echo "STACK : " . implode(",", $stack);
-					echo "<HR>";
+					// echo "<BR>ITTER-" . $i . " RULE" . $key . " FALSE";
+					// echo "<BR>DATABASE : " . implode(",", $database);
+					// echo "<BR>";
+					// echo "STACK : " . implode(",", $stack);
+					// echo "<HR>";
 				}
 			}
 			if (!$new_iterasi) {
@@ -236,9 +237,20 @@ class DiagnosaUser extends CI_Controller
 			}
 			$i++;
 		} while (true);
-		echo "RESULT :";
-		var_dump($result);
+
+		// if ($result == 1) {
+		// 	echo "TRUE";
+		// } else {
+		// 	echo "FALSE";
+		// }
+
+		// echo "RESULT :";
+		// var_dump($result);
 
 		$this->db->where('id_diagnosa_bc', $id_diagnosa_bc)->update('tb_diagnosa_bc', ["hasil"=>$result]);
+
+		$view_data_bc['hasil_bc'] = $result;
+		//$view_data['hasil_diagnosa_nbc'] = $this->nbc()->$hasil;
+		$this->load->view('home/hasil_diagnosa/hasil_diagnosa_bc', $view_data_bc);
 	}
 }

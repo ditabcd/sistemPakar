@@ -81,7 +81,11 @@
                     <?php echo $value->tanggal ?>
                   </td>
                   <td>
-                    <?php echo $value->fk_jeniskulit ?>
+                  <!-- <?php 
+                    echo $this->db->where('id_jeniskulit', $key)->get(
+                    'tb_jeniskulit')->row(0)->jenis_kulit; 
+                    ?>  -->
+                    <?php echo $value->jenis_kulit ?>
                   </td>
                 </tr>
               <?php endforeach; ?>

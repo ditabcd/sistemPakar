@@ -42,7 +42,8 @@
             <?php foreach ($prior as $key => $value) : ?>
               <tr>
                 <td>
-                  <?php echo ""; ?>
+                  <?php echo $this->db->where('id_jeniskulit', $key)->get(
+                    'tb_jeniskulit')->row(0)->jenis_kulit; ?>
                 </td>
                 <td>
                   <?php echo $value; ?>
@@ -55,7 +56,7 @@
           <table class="table">
             <thead class=" text-primary">
               <th>
-                Jenis Kulit
+                Gejala
               </th>
               <th>
                 Hasil Likelihood
@@ -65,7 +66,7 @@
             <?php foreach ($likelihood as $key => $value) : ?>
               <tr>
                 <td>
-                  <?php echo "gejala" ?>
+                  G00<?php echo $key+1 ?>
                 </td>
                 <td>
                   <?php echo $value; ?>
@@ -88,7 +89,10 @@
             <?php foreach ($posterior as $key => $value) : ?>
               <tr>
                 <td>
-                  <?php echo "jeniskulit" ?>
+                    <?php 
+                    echo $this->db->where('id_jeniskulit', $key)->get(
+                    'tb_jeniskulit')->row(0)->jenis_kulit; 
+                    ?>
                 </td>
                 <td>
                   <?php echo $value; ?>
