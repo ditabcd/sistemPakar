@@ -23,7 +23,9 @@
                   <?php echo $id_diagnosa ?>
                 </td>
                 <td>
-                  <?php echo $hasil?>
+                <!-- <?php echo $hasil ?> -->
+                  <?php echo $hasil . " [" .$this->db->where('id_jeniskulit', $hasil)->get(
+                    'tb_jeniskulit')->row(0)->jenis_kulit ."]" ?>
                 </td>
               </tr>
             </tbody>

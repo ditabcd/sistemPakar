@@ -48,7 +48,7 @@
                     <?php echo $value->fk_jeniskulit  ?>
                   </td>
                   <td class="text-center">
-                    <a href="<?php echo base_url("DiagnosaDetail/nbc/".$value->id_diagnosa) ?>" class="btn btn-primary">Detail Diagnosa</a>
+                    <a href="<?php echo base_url("DiagnosaDetail/nbc/".$value->id_diagnosa) ?>" class="btn btn-primary">Detail Diagnosa NBC</a>
                 </td>
                 <td class="text-center">
                     <a href="<?php echo base_url("Dashboard/delete/".$value->id_diagnosa) ?>" class="btn btn-danger">Hapus</a>
