@@ -9,9 +9,15 @@ class Dashboard extends CI_Controller {
         $this->load->helper('form');
     }
 
-    public function index()
-    {
+    public function index(){
         $data['dashboard_data'] = $this->Dashboard_model->getData()->result();
         $this->load->view('admin/dashboard/index', $data);
     }
+
+    public function delete($id_diagnosa){
+        $this->Dashboard_model->deleteData($id_diagnosa);
+
+        redirect("Dashboard");
+    }
+     
 }

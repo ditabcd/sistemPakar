@@ -4,7 +4,7 @@
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Daftar Gejala</h4>
-        <a href="<?php echo base_url("Gejala/insert") ?>" class="btn btn-primary">Tambah</a>
+        <!-- <a href="<?php echo base_url("Gejala/insert") ?>" class="btn btn-primary">Tambah</a> -->
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -19,9 +19,9 @@
               <th>
                 Gejala
               </th>
-              <th class="text-right">
+              <!-- <th class="text-right">
                 Action
-              </th>
+              </th> -->
             </thead>
             <tbody>
               <?php foreach ($gejala_data as $key => $value) : ?>
@@ -36,8 +36,8 @@
                     <?php echo $value->gejala ?>
                   </td>
                   <td class="text-right">
-                    <a href="<?php echo base_url("Gejala/update/".$value->id_gejala) ?>" class="btn btn-primary">Edit</a>
-                    <a href="<?php echo base_url("Gejala/delete/".$value->id_gejala) ?>" class="btn btn-danger">Hapus</a>
+                    <!-- <a href="<?php echo base_url("Gejala/update/".$value->id_gejala) ?>" class="btn btn-primary">Edit</a> -->
+                    <!-- <a href="<?php echo base_url("Gejala/delete/".$value->id_gejala) ?>" class="btn btn-danger">Hapus</a> -->
                 </td>
                 </tr>
               <?php endforeach; ?>

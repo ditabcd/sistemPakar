@@ -61,7 +61,7 @@ class Login extends CI_Controller {
         } else {
             $set_users = [
                 'username' => $this->input->post('username'),
-                'password' => md5($this->input->post('password')),
+                'password' => $this->input->post('password'),
                 'id_level' => '2'
             ];
             $this->db->insert('tb_user', $set_users);

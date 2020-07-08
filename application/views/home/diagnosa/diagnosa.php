@@ -92,7 +92,7 @@
                   </td>
                   <td>
                   	<center>	
-                  		<input type="radio" name="diagnosa[<?php echo $value->id_gejala ?>]" class="" value="1">
+                  		<input type="radio" name="diagnosa[<?php echo $value->id_gejala ?>]" class="" value="1" checked>
                   	</center>
                   </td>
                 </tr>

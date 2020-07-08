@@ -9,6 +9,5 @@ class History_model extends CI_Model {
 		->join('tb_jeniskulit', 'fk_jeniskulit=id_jeniskulit')
 		->where('id_user', $id_user)
 		->get('tb_diagnosa');
-
 	}
 }

@@ -68,6 +68,18 @@
             </a>
           </li>
           <li>
+            <a href="<?php echo base_url("DataLatih") ?>">
+              <i class="now-ui-icons education_atom"></i>
+              <p>Tambah Data Latih</p>
+            </a>
+          </li>
+          <li>
+            <a href="<?php echo base_url("Pengunjung") ?>">
+              <i class="now-ui-icons education_atom"></i>
+              <p>Pengunjung</p>
+            </a>
+          </li>
+          <li>
             <a href="<?php echo base_url("Tips") ?>">
               <i class="now-ui-icons education_atom"></i>
               <p>Tips</p>

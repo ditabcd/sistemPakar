@@ -61,7 +61,7 @@
           <div class="card-body">
             <br>
 			<h4>Hasil diagnosa awal jenis kulit anda adalah <?php echo $jenis_kulit->jenis_kulit ?></h4>
-      Silakan isi gejala kembali untuk memperkuat hasil diagnosa Anda sebelumnya;
+      <!-- Silakan isi gejala kembali untuk memperkuat hasil diagnosa Anda sebelumnya;
       <br><br>
             <?php echo form_open("DiagnosaUser/backward_action") ?>
 			<input type="hidden" name="id_diagnosa" value="<?php echo $id_diagnosa ?>">
@@ -110,7 +110,7 @@
               <button type="submit" name="" class="button btn-lg btn-success">
                 Submit Here!
               </button>
-            </center>
+            </center> -->
             <?php echo form_close(); ?>
           </div>
         </div>

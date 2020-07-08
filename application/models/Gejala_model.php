@@ -32,5 +32,4 @@ class Gejala_model extends CI_Model {
 
 	}
 }
-
 ?>

@@ -37,7 +37,6 @@ class DiagnosaDetail extends CI_Controller
 		} //melihat ada jenis kulit apa saja pada data training
 
 		$count_jeniskulit = array_count_values($data_jeniskulit); //menghitung jumlah masing-masing jenis kulit
-		
 
 		$sum_all_jeniskulit = array_sum($count_jeniskulit); //mencari jumlah keseluruhan jenis kulit
 		$prior = [];
@@ -55,11 +54,15 @@ class DiagnosaDetail extends CI_Controller
 			$data_per_jeniskulit[$value->jenis_kulit][] = $value->detail;
 		} //menghitung jumlah jenis kulit
 
+		//var_dump($data_per_jeniskulit);
+		// var_dump();
+		$countjk = $this->db->get('tb_jeniskulit')->num_rows();
+
 		$data_likelihood = [];
 		foreach ($data_per_jeniskulit as $key => $value) {
 			$count_per_gejala = []; //memasukkan gejala ke dlm array
 			foreach ($data_uji as $k => $v) {
-				$count_per_gejala[$k] = 0;
+				$count_per_gejala[$k] = 0+1;
 			} //menghitung banyaknya gejala 
 			foreach ($value as $k => $v) {
 				foreach ($v as $key_gejala => $value_gejala) {
@@ -67,20 +70,37 @@ class DiagnosaDetail extends CI_Controller
 						$count_per_gejala[$key_gejala]++;
 					}
 				}
-			} //menghitung gejala yang diinputkan
+			} 
+			//menghitung gejala yang diinputkan
 			// echo "count per gejala<br>";
 			// var_dump($count_per_gejala);
 
 			$likelihood = [];
 			foreach ($count_per_gejala as $k => $v) {
-				$likelihood[$k] = $v / $count_jeniskulit[$key];
+				$likelihood[$k] = $v / (($count_jeniskulit[$key])+($countjk));
 			}
 
+			$keyJ[] = $key;
 			$data_likelihood[$key] = $likelihood;
 		}
+
+		// for($i=0; $j<count($data_likelihood); $i++) {
+		// 	for($j=0; $j<count($data_likelihood[$keyJ[$i]]); $j++){
+		// 		echo $data_likelihood[$keyJ[$i][$j]];
+		// 	}
+		// ?
 		// echo "<pre>";
 		// echo "likelihood<br>";
-		// var_dump($data_likelihood);
+		// var_dump($keyJ[0]);
+		// var_dump($data_likelihood[$keyJ[0]]);
+		//echo "<br>likelihood<br>";
+		// var_dump($data_likelihood[$keyJ[1]]);
+		// echo "<br>likelihood<br>";
+		// var_dump($data_likelihood[$keyJ[2]]);
+		// echo "<br>likelihood<br>";
+		// var_dump($data_likelihood[$keyJ[3]]);
+		// echo "<br>likelihood<br>";
+		// var_dump($data_likelihood[$keyJ[4]]);
 
 		//langkah3->posterior
 		$posterior = [];
@@ -105,6 +125,18 @@ class DiagnosaDetail extends CI_Controller
 		$view_data['hasil'] = $hasil;
 		$view_data['prior'] = $prior;
 		$view_data['likelihood'] = $likelihood;
+		$view_data['data_likelihood'] = $data_likelihood;
+		$view_data['keyJ1'] = $keyJ[0];
+		$view_data['keyJ2'] = $keyJ[1];
+		$view_data['keyJ3'] = $keyJ[2];
+		$view_data['keyJ4'] = $keyJ[3];
+		$view_data['keyJ5'] = $keyJ[4];
+		$view_data['data_likelihood1'] = $data_likelihood[$keyJ[0]];
+		$view_data['data_likelihood2'] = $data_likelihood[$keyJ[1]];
+		$view_data['data_likelihood3'] = $data_likelihood[$keyJ[2]];
+		$view_data['data_likelihood4'] = $data_likelihood[$keyJ[3]];
+		$view_data['data_likelihood5'] = $data_likelihood[$keyJ[4]];
+		$view_data['max'] = $max;
 		$view_data['posterior'] = $posterior;
 		$view_data['jenis_kulit'] = $db_jeniskulit;
 		$view_data['gejala'] = $this->db->get('tb_gejala')->result();

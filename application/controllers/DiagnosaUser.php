@@ -1,17 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class DiagnosaUser extends CI_Controller
-{
+class DiagnosaUser extends CI_Controller{
 
-	public function index()
-	{
+	public function index(){
 		$data['gejala'] = $this->db->get('tb_gejala')->result();
 		$this->load->view('home/diagnosa/diagnosa', $data);
 	}
 
-	public function insert_diagnosa()
-	{
+	public function insert_diagnosa(){
 		$gejala = $this->db->get('tb_gejala')->result();
 
 		$set = [
@@ -38,8 +35,7 @@ class DiagnosaUser extends CI_Controller
 		redirect("DiagnosaUser/nbc/" . $id_diagnosa);
 	}
 
-	public function nbc($id_diagnosa)
-	{
+	public function nbc($id_diagnosa){
 		$start = microtime(true);
 		//get data from detail diagnosa
 		$data_uji = [];
@@ -89,11 +85,13 @@ class DiagnosaUser extends CI_Controller
 			$data_per_jeniskulit[$value->jenis_kulit][] = $value->detail;
 		} //menghitung jumlah jenis kulit
 
+		$countjk = $this->db->get('tb_jeniskulit')->num_rows();
+
 		$data_likelihood = [];
 		foreach ($data_per_jeniskulit as $key => $value) {
 			$count_per_gejala = []; //memasukkan gejala ke dlm array
 			foreach ($data_uji as $k => $v) {
-				$count_per_gejala[$k] = 0;
+				$count_per_gejala[$k] = 0+1;
 			} //menghitung banyaknya gejala 
 			foreach ($value as $k => $v) {
 				foreach ($v as $key_gejala => $value_gejala) {
@@ -107,7 +105,7 @@ class DiagnosaUser extends CI_Controller
 
 			$likelihood = [];
 			foreach ($count_per_gejala as $k => $v) {
-				$likelihood[$k] = $v / $count_jeniskulit[$key];
+				$likelihood[$k] = $v / ($count_jeniskulit[$key]+($countjk));
 			}
 
 			$data_likelihood[$key] = $likelihood;
@@ -139,118 +137,5 @@ class DiagnosaUser extends CI_Controller
 		$view_data['gejala'] = $this->db->get('tb_gejala')->result();
 		$this->load->view('home/hasil_diagnosa/hasil_diagnosa', $view_data);
 		//engkok ndek view ne manggil e $hasil
-	}
-
-
-	public function backward_action()
-	{
-		$set = [
-			'fk_diagnosa' => $this->input->post('id_diagnosa'),
-			'fk_jeniskulit' => $this->input->post('fk_jeniskulit'),
-		];
-
-		$this->db->insert('tb_diagnosa_bc', $set);
-
-		$id = $this->db->insert_id();
-		foreach ($this->input->post('diagnosa') as $key => $value) {
-			$set_detail = [
-				'fk_diagnosa_bc' => $id,
-				'fk_gejala' => $key,
-				'nilai' => $value,
-			];
-
-			$this->db->insert('tb_detail_diagnosa_bc', $set_detail);
-		}
-
-		redirect("DiagnosaUser/backwardChaining/" . $id);
-	}
-
-	public function backwardChaining($id_diagnosa_bc)
-	{
-
-		$db_rule = $this->db->get('tb_rule')->result();
-		$rule = [];
-		foreach ($db_rule as $key => $value) {
-			$rule[] = [
-				'condition' => explode(",", $value->kondisi),
-				'then' => $value->hasil,
-			];
-		} //mengambil rule dari db, explode=menghilangkan koma
-
-
-		$db_diagnosa_bc = $this->db->where('id_diagnosa_bc',$id_diagnosa_bc)->get('tb_diagnosa_bc')->row(0);
-		$db_diagnosa_bc_detail = $this->db->where('fk_diagnosa_bc',$id_diagnosa_bc)->get('tb_detail_diagnosa_bc')->result();
-		#inputan
-		// $input = ['G003', 'G006', 'G007', 'G011', 'G013', 'G016', 'G017', 'G018', 'G019'];
-		// $z = "J005";
-
-		$input = [];
-		foreach($db_diagnosa_bc_detail as $key => $value){
-			$input[] = $value->fk_gejala;
-		}
-		$z = $db_diagnosa_bc->fk_jeniskulit;
-
-		$result = false;
-		$database = $input;
-		$stack = [];
-		$stack[] = $z; //mengisi stack dg hasil yg diinginkan
-		$i = 0;
-		do {
-			$new_iterasi = false;
-			foreach ($rule as $key => $value) {
-				if (count(array_diff($value['condition'], $database)) === 0) {
-					unset($rule[$key]);
-
-					foreach ($stack as $k => $v) {
-						if ($v == $value['then'])
-							unset($stack[$k]);
-					}
-
-					$database[] = $value['then'];
-					$new_iterasi = true;
-					// echo "<BR>ITTER-" . $i . " RULE" . $key . " TRUE";
-					// echo "<BR>DATABASE : " . implode(",", $database);
-					// echo "<BR>";
-					// echo "STACK : " . implode(",", $stack);
-					// echo "<HR>";
-					break;
-				} else {
-					$add_to_stack = array_diff($value['condition'], $database);
-					$stack = array_merge($stack, $add_to_stack);
-					$stack = array_unique($stack);
-					// echo "<BR>ITTER-" . $i . " RULE" . $key . " FALSE";
-					// echo "<BR>DATABASE : " . implode(",", $database);
-					// echo "<BR>";
-					// echo "STACK : " . implode(",", $stack);
-					// echo "<HR>";
-				}
-			}
-			if (!$new_iterasi) {
-				//$result = false;
-				$result = 0;
-				break;
-			}
-			if (!in_array($z, $stack)) {
-				//$result = true;
-				$result = 1;
-				break;
-			}
-			$i++;
-		} while (true);
-
-		// if ($result == 1) {
-		// 	echo "TRUE";
-		// } else {
-		// 	echo "FALSE";
-		// }
-
-		// echo "RESULT :";
-		// var_dump($result);
-
-		$this->db->where('id_diagnosa_bc', $id_diagnosa_bc)->update('tb_diagnosa_bc', ["hasil"=>$result]);
-
-		$view_data_bc['hasil_bc'] = $result;
-		//$view_data['hasil_diagnosa_nbc'] = $this->nbc()->$hasil;
-		$this->load->view('home/hasil_diagnosa/hasil_diagnosa_bc', $view_data_bc);
 	}
 }

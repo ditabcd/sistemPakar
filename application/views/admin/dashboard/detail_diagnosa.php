@@ -53,8 +53,15 @@
               </tr>
             <?php endforeach; ?>
             </tbody>
+             </table>
+             <!-- <?php 
+              for($i=0 ; $i<count($data_likelihood); $i++){
+                for($j=0 ; $j<count($data_likelihood[$keyJ[$i]]); $j++){
+                    echo $data_likelihood[$keyJ[$i]][$j] . "<br>";
+                }
+              } ?> -->
           </table>
-          <h4 class="card-title">Likelihood</h4>
+          <h4 class="card-title">Likelihood <?php echo $keyJ1; ?></h4>
           <table class="table">
             <thead class=" text-primary">
               <th>
@@ -65,7 +72,100 @@
               </th>
             </thead>
             <tbody>
-            <?php foreach ($likelihood as $key => $value) : ?>
+            <?php foreach ($data_likelihood1 as $key => $value) : ?>
+              <tr>
+                <td>
+                  G00<?php echo $key+1 ?>
+                </td>
+                <td>
+                  <?php echo $value; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
+          </table>
+          <h4 class="card-title">Likelihood <?php echo $keyJ2; ?></h4>
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Gejala
+              </th>
+              <th>
+                Hasil Likelihood
+              </th>
+            </thead>
+            <tbody>
+            <?php foreach ($data_likelihood2 as $key => $value) : ?>
+              <tr>
+                <td>
+                  G00<?php echo $key+1 ?>
+                </td>
+                <td>
+                  <?php echo $value; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
+          <h4 class="card-title">Likelihood <?php echo $keyJ3; ?></h4>
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Gejala
+              </th>
+              <th>
+                Hasil Likelihood
+              </th>
+            </thead>
+            <tbody>
+            <?php foreach ($data_likelihood3 as $key => $value) : ?>
+              <tr>
+                <td>
+                  G00<?php echo $key+1 ?>
+                </td>
+                <td>
+                  <?php echo $value; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
+          <h4 class="card-title">Likelihood <?php echo $keyJ4; ?></h4>
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Gejala
+              </th>
+              <th>
+                Hasil Likelihood
+              </th>
+            </thead>
+            <tbody>
+            <?php foreach ($data_likelihood4 as $key => $value) : ?>
+              <tr>
+                <td>
+                  G00<?php echo $key+1 ?>
+                </td>
+                <td>
+                  <?php echo $value; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
+          <h4 class="card-title">Likelihood <?php echo $keyJ5; ?></h4>
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Gejala
+              </th>
+              <th>
+                Hasil Likelihood
+              </th>
+            </thead>
+            <tbody>
+            <?php foreach ($data_likelihood5 as $key => $value) : ?>
               <tr>
                 <td>
                   G00<?php echo $key+1 ?>
@@ -103,6 +203,7 @@
             <?php endforeach; ?>
             </tbody>
           </table>
+          <h4 class="card-title">Hasil Kualifikasi Maksimum <?php echo $max; ?> [<?php echo $hasil; ?>]</h4>
         </div>
       </div>
     </div>

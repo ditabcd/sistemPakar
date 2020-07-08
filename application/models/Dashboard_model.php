@@ -7,5 +7,13 @@ class Dashboard_model extends CI_Model {
 		return $this->db->get('tb_diagnosa');
 		result();
 	}
+
+	public function deleteData($id_diagnosa){
+
+        $this->db
+            ->where('id_diagnosa', $id_diagnosa)
+            ->delete('tb_diagnosa');
+
+	}
 }
 ?>

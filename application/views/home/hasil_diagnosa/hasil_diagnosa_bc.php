@@ -37,7 +37,7 @@
     </div>
   </nav>
 
-<section class="hero-wrap hero-wrap-3">
+<section class="hero-wrap3 hero-wrap-3">
   <div class="overlay"></div>
     <div class="container">
        <!-- <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
